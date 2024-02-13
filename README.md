@@ -12,6 +12,22 @@ Repository Design Pattern
   	-Entities - Models/Classes representing DB tables. (Class Library)
 
 Entity Framework
-	-Use Migration to create database and tables.
-	-We have created models/classes for tables in code and we have create DBContext class with that models (add public Dbset for models and override onconfiguring method-add DB connection string)
+	-Use Migration to create databases and tables.
+	-We have created models/classes for tables in code and we have created a DBContext class with those models (add public Dbset for models and override onconfiguring method-add DB 		connection string)
  	-run the command in the package manager console "add-migration initial" and then "update-database"
+
+Dependency Injections
+	-Used to develop loosely coupled software components so code becomes more maintainable.
+ 	-We have used constructor injection implementation.
+  	For example: If we want to use payment gateways in the system, we can have multiple choices like Razorpay, PayPal, etc.
+   		-We will create an interface with common payment methods like MakePayment(), GetPaymentId(), etc.
+     		-Then we will implement the interface according to payment gateway APIs.
+       		-We will pass the interface object in our service class constructor as a parameter and use that to call methods.
+	 	-In program.cs file we have to register our interface with implemented class(builder.Services.AddTransient<IPaymentService, RazorPayService>()) , so code will call 			implemented class method
+   		-In the future, if we want to change our payment gateway to Paypal, then we just need to create a new class and implement a payment interface using PayPal APIs, and register this injection in program.cs
+     		-This way, we do not have to change any existing code for a change.
+
+Improvements
+	-UI changes (inconsistent UI, dropdown menu)
+ 	-Handle Errors and exceptions
+  	-Payment system.
